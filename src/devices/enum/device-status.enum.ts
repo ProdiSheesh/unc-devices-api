@@ -1,0 +1,6 @@
+export enum DeviceStatus {
+  AVAILABLE = 'AVAILABLE',
+  NOT_AVAILABLE = 'NOT AVAILABLE',
+  DEFECTIVE = 'DEFECTIVE',
+  MISSING = 'MISSING',
+}
