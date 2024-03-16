@@ -21,6 +21,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           url: config.get('URL'),
           entities: [Device, Category],
           synchronize: true,
+          ssl: true,
         };
       },
     }),
