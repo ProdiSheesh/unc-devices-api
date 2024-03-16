@@ -1,12 +1,12 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export default class UpdateDeviceDto {
+export class CreateDeviceDto {
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   name: string;
 
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   tagNumber: string;
 
   @IsString()
@@ -19,9 +19,9 @@ export default class UpdateDeviceDto {
 
   @IsString()
   @IsOptional()
-  status: string;
+  status?: string;
 
   @IsInt()
-  @IsOptional()
-  category: number;
+  @IsNotEmpty()
+  categoryId: number;
 }
