@@ -71,9 +71,16 @@ export class DevicesService {
   }
 
   async update(id: number, updateDeviceDto: UpdateDeviceDto) {
+    const { categoryId, ...updatedData } = updateDeviceDto;
+
     const device = await this.findOne(id);
 
-    Object.assign(device, updateDeviceDto);
+    if (categoryId) {
+      const category = await this.categoriesService.findOne(categoryId);
+      device.category = category;
+    }
+
+    Object.assign(device, updatedData);
 
     return this.repo.save(device);
   }
