@@ -9,11 +9,19 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { DevicesService } from './devices.service';
 import { CreateDeviceDto } from './dto/create-device.dto';
 import { UpdateDeviceDto } from './dto/update-device.dto';
+import { AuthGuard } from 'src/lib/guards/auth.guard';
+import { RolesGuard } from 'src/lib/guards/roles.guard';
+import { UserRole } from 'src/users/enum/user-role.enum';
+import { Roles } from 'src/lib/decorators/user-roles.decorator';
 
+@UseGuards(RolesGuard)
+@Roles(UserRole.ADMIN)
+@UseGuards(AuthGuard)
 @Controller('devices')
 export class DevicesController {
   constructor(private devicesService: DevicesService) {}
