@@ -8,11 +8,19 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import UpdateCategoryDto from './dto/update-category.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { AuthGuard } from 'src/lib/guards/auth.guard';
+import { RolesGuard } from 'src/lib/guards/roles.guard';
+import { Roles } from 'src/lib/decorators/user-roles.decorator';
+import { UserRole } from 'src/users/enum/user-role.enum';
 
+@UseGuards(RolesGuard)
+@Roles(UserRole.ADMIN)
+@UseGuards(AuthGuard)
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
